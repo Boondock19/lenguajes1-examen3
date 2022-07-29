@@ -92,5 +92,44 @@ process.stdin.on('data', data => {
 
 const defType = (types) => {
     console.log("Entro en defType")
-    console.log(types)
+    let splitedType = types.split("")
+    const originalChar = splitedType[0]
+    let compareChar = originalChar.toUpperCase()
+
+    console.log('orignalChar: ' + originalChar)
+    console.log('compareChar: ' + compareChar)
+
+    /**
+     * Si originalChar y compareChar son iguales,
+     * quiere decir que la primera letra es mayuscula 
+     * y por lo tanto es una variable. en caso contrario
+     * es un atomico o estructura.
+     */
+
+    if (originalChar === compareChar) {
+        console.log("Es una variable")
+        arrayOfVariables.push(types)
+    } else {
+        
+        /**
+         * Si la primera letra es minuscula,
+         * puede ser un atomico o una estructura.
+         * para descartar si es una estructura, verificamos
+         * que contenga ( y ). 
+         */
+        if (types.includes('(') && types.includes(')')) {
+            console.log("Es una estructura")
+            arrayOfStructs.push(types)
+        } else {
+            console.log("Es un atomico")
+            arrayOfAtomics.push(types)
+        }
+    }
+
+    console.log('Array de atomico' + " " + arrayOfAtomics)
+    console.log('Array de variable' + " " + arrayOfVariables)
+    console.log('Array de estructuras' + " " + arrayOfStructs)
+    
+
+    
 }
