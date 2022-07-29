@@ -1,0 +1,10 @@
+{
+    "scripts": {
+        "start": " go run ./1/churchNumbers.go",
+        "dev" : "nodemon ./5/dataManager.js",
+        "recursion": "python ./4/recursion.py",
+        "dataManager" : "node ./5/dataManager.js"
+    },
+    "type": "module"
+
+}
