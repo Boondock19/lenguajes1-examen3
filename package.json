@@ -1,9 +1,9 @@
 {
     "scripts": {
         "start": " go run ./1/churchNumbers.go",
-        "dev" : "nodemon ./5/dataManager.js",
+        "dev" : "nodemon ./6/prolog.js",
         "recursion": "python ./4/recursion.py",
-        "dataManager" : "node ./5/dataManager.js"
+        "prolog" : "node ./6/prolog.js"
     },
     "type": "module"
 
