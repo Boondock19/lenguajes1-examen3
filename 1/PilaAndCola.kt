@@ -45,10 +45,6 @@ class Pila<T>(): Secuencia<T>() {
         }
     }
 
-    // override fun toString(): String {
-        
-    // }
-
 }
 
 /* 
@@ -62,19 +58,16 @@ class Cola<T>(): Secuencia<T>() {
     
     var arrayOfElements = mutableListOf<T>()
     var sizeOfQueue = 0
-    var head = 0
-    var tail = 0
 
     override fun agregar(element: T): Boolean {
         if (vacio()) {
             arrayOfElements.add(element)
             sizeOfQueue++
-            head++
-            tail++
+            
         } else {
             arrayOfElements.add(element)
             sizeOfQueue++
-            tail++
+            
         }
         
         return true
@@ -84,8 +77,7 @@ class Cola<T>(): Secuencia<T>() {
         if (vacio()) {
             return false
         } else {
-            arrayOfElements.removeAt(head)
-            head++
+            arrayOfElements.removeAt(0)
             sizeOfQueue--
         }
         return true

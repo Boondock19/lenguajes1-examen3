@@ -2,7 +2,7 @@ import estructruras.secuencias.*
 
 
 fun main(args: Array<String>) {
-    println("Secuencia")
+    println("Ejecutando ejemplos de Secuencia")
 
     // Crearemos una pila de strings
     var pila = Pila<String>()
@@ -17,5 +17,24 @@ fun main(args: Array<String>) {
     println(pila.arrayOfElements)
     pila.remover()
     println(pila.arrayOfElements)
-    println("Esta la pila vacia? ${pila.vacio()}")
+    println("\nEsta la pila vacia? ${pila.vacio()}")
+    println("\nFin de ejemplos de pila\n")
+
+    // Creamos una cola con Strings
+
+    var cola = Cola<String>()
+    cola.agregar("Hola")
+    cola.agregar("Mundo")
+    cola.agregar("No Es lo mismo!")
+    println(cola.arrayOfElements)
+    // removeremos uno a uno e imprimiremos 
+    cola.remover()
+    println(cola.arrayOfElements)
+    cola.remover()
+    println(cola.arrayOfElements)
+    cola.remover()
+    println(cola.arrayOfElements)
+    println("\nEsta la cola vacia? ${cola.vacio()}")
+    println("\nFin de ejemplos de cola\n")
+
 }
