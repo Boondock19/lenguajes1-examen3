@@ -18,6 +18,7 @@ fun main(args: Array<String>) {
     println(pila.remover())
     println(pila.arrayOfElements)
     println("\nEsta la pila vacia? ${pila.vacio()}")
+    //println(pila.remover())
     println("\nFin de ejemplos de pila\n")
 
     // Creamos una cola con Strings
@@ -35,6 +36,7 @@ fun main(args: Array<String>) {
     println(cola.remover())
     println(cola.arrayOfElements)
     println("\nEsta la cola vacia? ${cola.vacio()}")
+   // println(cola.remover())
     println("\nFin de ejemplos de cola\n")
 
 }
