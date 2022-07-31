@@ -121,16 +121,13 @@ const defType = (types) => {
 
 
 const nameExists = (name) => {
-    console.log('NOmbre', name)
-    console.log('Array of names', arrayOfNames)
-    arrayOfNames.find((element) => {
-        console.log('Element', element)
-        console.log('Name', name)
-        console.log('Element == Name', element == name)
+    let exist = arrayOfNames.find((element) => {
         if (element == name) {
             return name
         } else {
             return undefined
         } 
     })
+
+    return exist
 }
