@@ -9,9 +9,9 @@ package estructruras.secuencias
 
 abstract class Secuencia<T>() {
 
-    abstract fun agregar(element:T): Boolean
+    abstract fun agregar(element:T)
 
-    abstract fun remover(): Boolean
+    abstract fun remover(): T
 
     abstract fun vacio(): Boolean
 }

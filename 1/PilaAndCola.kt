@@ -14,30 +14,32 @@ class Pila<T>(): Secuencia<T>() {
     var sizeOfStack = 0
     var top = 0
 
-    override fun agregar(element: T): Boolean {
+    override fun agregar(element: T) {
         arrayOfElements.add(element)
         sizeOfStack++
         top++
-        return true
     }
 
-   override fun remover(): Boolean {
-
+   override fun remover(): T {
+        var element : T
         if (vacio()) {
-            return false
+            throw Exception("Pila vacia")
         } else {
             if (top == 0) {
-                arrayOfElements.removeAt(top)
+                element = arrayOfElements.removeAt(top)
+                
             } else {
                 top--
-                arrayOfElements.removeAt(top)
+                element = arrayOfElements.removeAt(top)
             }
+
             sizeOfStack--
-            return true
+            return element
         }
     }
 
    override fun vacio(): Boolean {
+        
         if (sizeOfStack == 0) {
             return true
         } else {
@@ -59,7 +61,7 @@ class Cola<T>(): Secuencia<T>() {
     var arrayOfElements = mutableListOf<T>()
     var sizeOfQueue = 0
 
-    override fun agregar(element: T): Boolean {
+    override fun agregar(element: T) {
         if (vacio()) {
             arrayOfElements.add(element)
             sizeOfQueue++
@@ -70,17 +72,17 @@ class Cola<T>(): Secuencia<T>() {
             
         }
         
-        return true
     }
 
-    override fun remover(): Boolean {
+    override fun remover(): T {
+        var element : T
         if (vacio()) {
-            return false
+            throw Exception("Cola vacia")
         } else {
-            arrayOfElements.removeAt(0)
+            element = arrayOfElements.removeAt(0)
             sizeOfQueue--
         }
-        return true
+        return element
     }
 
     override fun vacio(): Boolean {
