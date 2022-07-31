@@ -1,10 +1,10 @@
 {
     "scripts": {
         "start": " go run ./1/churchNumbers.go",
-        "dev" : "nodemon ./6/prolog.js",
+        "dev" : "nodemon ./4/clases.js",
         "comp-secuencia": "kotlinc 1/Secuencia.kt 1/PilaAndCola.kt 1/MainSecuencia.kt  -include-runtime -d 1/MainSecuencia.jar",
         "secuencia": "java -jar 1/MainSecuencia.jar",
-        "recursion": "python ./4/recursion.py",
+        "clases": "node  ./4/clases.js",
         "prolog" : "node ./6/prolog.js"
     },
     "type": "module"
