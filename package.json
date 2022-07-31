@@ -2,6 +2,8 @@
     "scripts": {
         "start": " go run ./1/churchNumbers.go",
         "dev" : "nodemon ./6/prolog.js",
+        "comp-secuencia": "kotlinc 1/Secuencia.kt 1/PilaAndCola.kt 1/MainSecuencia.kt  -include-runtime -d 1/MainSecuencia.jar",
+        "secuencia": "java -jar 1/MainSecuencia.jar",
         "recursion": "python ./4/recursion.py",
         "prolog" : "node ./6/prolog.js"
     },
