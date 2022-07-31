@@ -74,7 +74,6 @@ process.stdin.on("data", (data) => {
  */
 
 const defType = (types) => {
-  console.log("Entro en defType");
   console.log(types);
   let methods = [];
   let name = "";
@@ -85,14 +84,18 @@ const defType = (types) => {
     } else {
       let father = types[3];
       if (!fatherExists(father, arrayOfSuperClass)) {
-        console.log("Error: el padre no existe");
+        console.log("Error: la super clase no existe");
       } else {
         types[types.length - 1] = types[types.length - 1].trim();
         methods = types.slice(4);
-        const newClass = new SimpleClass(name, methods, father);
-        arrayOfClasses.push(newClass);
-        arrayOfNames.push(name);
-        // console.log("Contiene :, clase que hereda de una super clase")
+        if (findDuplicates(methods)) {
+          console.log("Error: hay metodos duplicados");
+        } else {
+          const newClass = new SimpleClass(name, methods, father);
+          arrayOfClasses.push(newClass);
+          arrayOfNames.push(name);
+          // console.log("Contiene :, clase que hereda de una super clase")
+        }
       }
     }
   } else {
@@ -101,14 +104,25 @@ const defType = (types) => {
       console.log("Error: el nombre ya existe");
     } else {
       types[types.length - 1] = types[types.length - 1].trim();
-      methods = types.slice(3);
-      const newSuperClass = new SuperClass(name, methods);
-      arrayOfSuperClass.push(newSuperClass);
-      arrayOfNames.push(name);
-      // console.log("No contiene : es una clase con metodos")
+      methods = types.slice(2);
+      if (findDuplicates(methods)) {
+        console.log("Error: hay metodos duplicados");
+      } else {
+        const newSuperClass = new SuperClass(name, methods);
+        arrayOfSuperClass.push(newSuperClass);
+        arrayOfNames.push(name);
+        // console.log("No contiene : es una clase con metodos")
+      }
     }
   }
 };
+
+/**
+ * Funcion para verificar si un nombre de clase ya existe
+ * @param {nombre a verificar} name
+ * @param {array en donde buscar el nombre} array
+ * @returns
+ */
 
 const nameExists = (name, array) => {
   let exist = array.find((element) => {
@@ -122,14 +136,38 @@ const nameExists = (name, array) => {
   return exist;
 };
 
+/**
+ * Funcion que verifica si existe el nombre de una super clase
+ * @param {nombre a buscar} name
+ * @param {en donde buscar el nombre} array
+ * @returns
+ */
+
 const fatherExists = (name, array) => {
-    let exist = array.find((element) => {
-      if (element.name == name) {
-        return name;
-      } else {
-        return undefined;
-      }
-    });
-  
-    return exist;
-  };
+  let exist = array.find((element) => {
+    if (element.name == name) {
+      return name;
+    } else {
+      return undefined;
+    }
+  });
+
+  return exist;
+};
+
+/**
+ * Funcion que verifica si hay metodos duplicados de una clase.
+ * @param {array para verificar duplicados} array
+ * @returns true si hay duplicados, false si no
+ */
+const findDuplicates = (array) => {
+  // Al crear un Set JS elimina los duplicados
+  const newSet = new Set(array);
+  // Si el tamaño del array y el set es distinto, entonces existen duplicados.
+
+  if (array.length !== newSet.size) {
+    return true;
+  } else {
+    return false;
+  }
+};
