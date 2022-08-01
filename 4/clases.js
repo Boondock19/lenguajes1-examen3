@@ -32,8 +32,6 @@ process.stdin.on("data", (data) => {
     if (dataArray.length < 3) {
       console.log("Error: faltan datos");
     } else {
-      console.log("Entro en CLASS");
-      console.log(dataArray);
       let expression = dataArray[2].trim();
       if (expression == ":" && dataArray.length < 5) {
         console.log(
@@ -41,8 +39,6 @@ process.stdin.on("data", (data) => {
         );
       } else {
         defType(dataArray);
-        console.log("Array of clases", arrayOfClasses);
-        console.log("array of superClases", arrayOfSuperClass);
       }
     }
   }
@@ -55,7 +51,6 @@ process.stdin.on("data", (data) => {
     if (dataArray.length < 2) {
       console.log("Error: faltan datos");
     } else {
-      console.log("Entro en DESCRIBIR");
       const name = dataArray[1].trim();
       if (!nameExists(name, arrayOfNames)) {
         console.log("Error: el nombre no existe");
@@ -64,16 +59,13 @@ process.stdin.on("data", (data) => {
             // clase normal
             const instancia = classExists(name, arrayOfClasses);
             const instanciaSuperClass = classExists(instancia.getFather(), arrayOfSuperClass);
-            console.log(`${name} es una clase normal y el padre es ${instanciaSuperClass.name}`);
             instancia.describrir(instanciaSuperClass.getMethods());
         } else {
             const instancia = classExists(name, arrayOfSuperClass);
-            console.log("Esta es la instancia",instancia)
-            console.log( instancia instanceof SimpleClass);
+            // console.log( instancia instanceof SimpleClass);
             instancia.describrir()
         }
       }
-      console.log(dataArray);
     }
   }
 
@@ -92,7 +84,6 @@ process.stdin.on("data", (data) => {
  */
 
 const defType = (types) => {
-  console.log(types);
   let methods = [];
   let name = "";
   if (types.includes(":")) {
