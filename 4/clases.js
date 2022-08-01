@@ -25,7 +25,8 @@ process.stdin.on("data", (data) => {
   const dataArray = dataString.split(" ");
 
   /* 
-        Creacion de tipos atomicos
+        Bloque que se encarga de manera la funcionalidad
+        de definir clases.
     */
   if (dataArray[0].trim() == "CLASS") {
     if (dataArray.length < 3) {
@@ -47,13 +48,31 @@ process.stdin.on("data", (data) => {
   }
 
   /* 
-        Creacion de structs
+        Bloque encargado de manera la funcionalidad de
+        Describir.
     */
   if (dataArray[0].trim() == "DESCRIBIR") {
     if (dataArray.length < 2) {
       console.log("Error: faltan datos");
     } else {
       console.log("Entro en DESCRIBIR");
+      const name = dataArray[1].trim();
+      if (!nameExists(name, arrayOfNames)) {
+        console.log("Error: el nombre no existe");
+      } else {
+        if (!classExists(name, arrayOfSuperClass)) {
+            // clase normal
+            const instancia = classExists(name, arrayOfClasses);
+            const instanciaSuperClass = classExists(instancia.getFather(), arrayOfSuperClass);
+            console.log(`${name} es una clase normal y el padre es ${instanciaSuperClass.name}`);
+            instancia.describrir(instanciaSuperClass.getMethods());
+        } else {
+            const instancia = classExists(name, arrayOfSuperClass);
+            console.log("Esta es la instancia",instancia)
+            console.log( instancia instanceof SimpleClass);
+            instancia.describrir()
+        }
+      }
       console.log(dataArray);
     }
   }
@@ -68,9 +87,8 @@ process.stdin.on("data", (data) => {
 });
 
 /**
- * Funcion para crear una estructura
- * se encarga de manejar la insercion en atomics,
- * variables y structs.
+ * Funcion para definir el tipo de una clase
+ * y manera su correcta insercion.
  */
 
 const defType = (types) => {
@@ -83,7 +101,7 @@ const defType = (types) => {
       console.log("Error: el nombre ya existe");
     } else {
       let father = types[3];
-      if (!fatherExists(father, arrayOfSuperClass)) {
+      if (!classExists(father, arrayOfSuperClass)) {
         console.log("Error: la super clase no existe");
       } else {
         types[types.length - 1] = types[types.length - 1].trim();
@@ -137,13 +155,13 @@ const nameExists = (name, array) => {
 };
 
 /**
- * Funcion que verifica si existe el nombre de una super clase
+ * Funcion que retorna la instancia de una clase si existe
  * @param {nombre a buscar} name
  * @param {en donde buscar el nombre} array
  * @returns
  */
 
-const fatherExists = (name, array) => {
+const classExists = (name, array) => {
   let exist = array.find((element) => {
     if (element.name == name) {
       return name;
