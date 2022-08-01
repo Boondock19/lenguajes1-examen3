@@ -9,14 +9,14 @@ console.log("Luego de cada accion, se pedira una siguiente");
  * Array de clases que heredan de una super clase
  *
  */
-let arrayOfClasses = [];
+export let arrayOfClasses = [];
 
 /**
  * Array de clases que no heredan de una super clase
  *
  */
 
-let arrayOfSuperClass = [];
+export let arrayOfSuperClass = [];
 
 let arrayOfNames = [];
 
@@ -83,7 +83,7 @@ process.stdin.on("data", (data) => {
  * y manera su correcta insercion.
  */
 
-const defType = (types) => {
+export const defType = (types) => {
   let methods = [];
   let name = "";
   if (types.includes(":")) {
@@ -169,7 +169,7 @@ const classExists = (name, array) => {
  * @param {array para verificar duplicados} array
  * @returns true si hay duplicados, false si no
  */
-const findDuplicates = (array) => {
+export const findDuplicates = (array) => {
   // Al crear un Set JS elimina los duplicados
   const newSet = new Set(array);
   // Si el tamaño del array y el set es distinto, entonces existen duplicados.

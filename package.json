@@ -1,12 +1,16 @@
 {
     "scripts": {
         "start": " go run ./1/churchNumbers.go",
-        "dev" : "nodemon ./4/clases.js",
+        "dev": "nodemon ./4/clases.js",
+        "comp-producto": "javac 2/ProductoPunto.java 2/Main.java",
         "comp-secuencia": "kotlinc 1/Secuencia.kt 1/PilaAndCola.kt 1/MainSecuencia.kt  -include-runtime -d 1/MainSecuencia.jar",
         "secuencia": "java -jar 1/MainSecuencia.jar",
         "clases": "node  ./4/clases.js",
-        "prolog" : "node ./6/prolog.js"
+        "prolog": "node ./6/prolog.js",
+        "test" : "jest"
     },
-    "type": "module"
-
+    "type": "module",
+    "devDependencies": {
+        "jest": "^28.1.3"
+    }
 }
