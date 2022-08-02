@@ -1,87 +1,68 @@
-
 // Enter any texts ( User input)
 
-
-
-
 console.log("Bienvenido al programa de interprete de prolog");
-console.log('Luego de cada accion, se pedira una siguiente')
+console.log("Luego de cada accion, se pedira una siguiente");
 
 // Creando un array para cada uno de los programas a definir
 
 /**
- * atomics serian expresiones con def y la primera letra 
+ * atomics serian expresiones con def y la primera letra
  * es miniscula.
- * 
+ *
  * hola
  * quickSort
  */
-let arrayOfAtomics = []
+let arrayOfAtomics = [];
 
 /**
- * variables serian expresiones con def y la primera letra 
+ * variables serian expresiones con def y la primera letra
  * es mayuscula.
- * 
+ *
  * Hola
  * QuickSort
  */
 
-let arrayOfVariables = []
+let arrayOfVariables = [];
 
 /**
- * estructuras serian expresiones con def y la primera letra 
+ * estructuras serian expresiones con def y la primera letra
  * es minuscula, que representa un atomo, seguida de una secuencia,
  * parantizada y separadas con comas, de otras expresiones.
- * 
+ *
  * f(x,y)
  * quickSort(entrada,Salida)
  */
 
-let arrayOfStructs = []
+let arrayOfStructs = [];
 
+process.stdin.on("data", (data) => {
+  const dataString = data.toString();
+  const dataArray = dataString.split(" ");
 
-
-
-
-process.stdin.on('data', data => {
-
-    const dataString = (data).toString()
-    const dataArray =dataString.split(" ")
-    
-
-    /* 
+  /* 
         Creacion de tipos atomicos
     */
-    if(dataArray[0] == "DEF") {
-        console.log("Entro en DEF")
-        let expression = dataArray[1].trim()
-        defType(expression)
-        
-    }
-        
-    
+  if (dataArray[0] == "DEF") {
+    let spliceData = dataArray.splice(1);
+    spliceData[spliceData.length - 1] =
+    spliceData[spliceData.length - 1].trim();
+    defType(spliceData);
+  }
 
-        
-    
-
-    /* 
+  /* 
         Creacion de structs
     */
-    if(dataArray[0] == "ASK") {
+  if (dataArray[0] == "ASK") {
+    console.log("Entro en ASK , no se implemento");
+  }
 
-        console.log("Entro en ASK")        
+  console.log("Siguiente accion: ");
 
-    }
-
- 
-    console.log("Siguiente accion: ")
-
-    // Salimos del programa
-    if (dataArray[0].trim() === 'SALIR') {
-        console.log('Terminando el programa ...')
-        process.exit()
-    }
-    
+  // Salimos del programa
+  if (dataArray[0].trim() === "SALIR") {
+    console.log("Terminando el programa ...");
+    process.exit();
+  }
 });
 
 /**
@@ -91,45 +72,71 @@ process.stdin.on('data', data => {
  */
 
 const defType = (types) => {
-    console.log("Entro en defType")
-    let splitedType = types.split("")
-    const originalChar = splitedType[0]
-    let compareChar = originalChar.toUpperCase()
+  console.log(types);
+  let firstPredicate = types[0];
+  let splitedType = firstPredicate.split("");
+  const originalChar = splitedType[0];
+  let compareChar = originalChar.toUpperCase();
 
-    console.log('orignalChar: ' + originalChar)
-    console.log('compareChar: ' + compareChar)
+  /**
+   * Si originalChar y compareChar son iguales,
+   * quiere decir que la primera letra es mayuscula
+   * y por lo tanto es una variable. en caso contrario
+   * es un atomico o estructura.
+   */
 
-    /**
-     * Si originalChar y compareChar son iguales,
-     * quiere decir que la primera letra es mayuscula 
-     * y por lo tanto es una variable. en caso contrario
-     * es un atomico o estructura.
-     */
-
-    if (originalChar === compareChar) {
-        console.log("Es una variable")
-        arrayOfVariables.push(types)
+  if (originalChar === compareChar) {
+    if (types.includes("(") && types.includes(")")) {
+      console.log("ERROR: formato incorrecto para estructura");
     } else {
-        
-        /**
-         * Si la primera letra es minuscula,
-         * puede ser un atomico o una estructura.
-         * para descartar si es una estructura, verificamos
-         * que contenga ( y ). 
-         */
-        if (types.includes('(') && types.includes(')')) {
-            console.log("Es una estructura")
-            arrayOfStructs.push(types)
-        } else {
-            console.log("Es un atomico")
-            arrayOfAtomics.push(types)
-        }
+      /**
+       * En esta seccion debemos definir los valores internos
+       * de la estructura para saber si son atomos o variables
+       */
+      arrayOfVariables.push(types);
     }
+  } else {
+    /**
+     * Si la primera letra es minuscula,
+     * puede ser un atomico o una estructura.
+     * para descartar si es una estructura, verificamos
+     * que contenga ( y ).
+     */
+    if (validParenthesis(types.join(" "))) {
+      arrayOfStructs.push(types[0]);
+    } else {
+      console.log("ERROR: el formato ingresado se encuentra mal parentizado");
+    }
+  }
 
-    console.log('Array de atomico' + " " + arrayOfAtomics)
-    console.log('Array de variable' + " " + arrayOfVariables)
-    console.log('Array de estructuras' + " " + arrayOfStructs)
-    
+  console.log("Array de atomico" + " " + arrayOfAtomics);
+  console.log("Array de variable" + " " + arrayOfVariables);
+  console.log("Array de estructuras" + " " + arrayOfStructs);
+};
 
-    
-}
+/**
+ * Funcion para verificar si una estructura
+ * esta bien parentizada.
+ */
+
+const validParenthesis = (expression) => {
+  let stack = [];
+
+  const characters = expression.split("");
+  for (let i = 0; i < characters.length; i++) {
+    if (characters[i] == "(") {
+      stack.push(characters[i]);
+    } else if (characters[i] == ")") {
+      let last = stack.pop();
+      if (last !== "(") {
+        return false;
+      }
+    }
+  }
+
+  if (stack.length > 0) {
+    return false;
+  } else {
+    return true;
+  }
+};
