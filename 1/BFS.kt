@@ -57,7 +57,6 @@ public class BFS(val g: Grafo, val D: Int, H: Int): Busqueda<Int>() {
                 }
             }
             this.colores[u] = Color.NEGRO 
-            println("Predecesores en bfs ${this.predecesores.contentToString()}       ${this.nodosExplorados}        lo encontro? ${this.contar}")
         }
 
        

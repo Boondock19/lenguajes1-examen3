@@ -51,7 +51,6 @@ public class DFS(val g: Grafo, val d:Int,val h:Int) : Busqueda<Int>() {
                     this.colores[v] = Color.NEGRO
                 }
             }
-            println("Predecesores en dfs ${this.predecesoresNull.contentToString()}       ${this.verticesExplorados}     lo encontro? ${this.contar}")
         }
 
     }
