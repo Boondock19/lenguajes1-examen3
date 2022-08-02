@@ -2,7 +2,7 @@
 import ve.usb.libGrafo.*
 
 fun main(args: Array<String>) {
-    println("Entro gucci")
+    
     var grafoNoDirigido = GrafoNoDirigido(7)
 
     // Agregando aristas al grafo
@@ -14,10 +14,12 @@ fun main(args: Array<String>) {
     // grafoNoDirigido.agregarArista(Arista(3,4))
 
 
-    grafoNoDirigido.agregarArista(Arista(0,1))
+    grafoNoDirigido.agregarArista(Arista(0,3))
+    grafoNoDirigido.agregarArista(Arista(0,4))
     grafoNoDirigido.agregarArista(Arista(1,3))
-    grafoNoDirigido.agregarArista(Arista(3,5))
+    grafoNoDirigido.agregarArista(Arista(1,5))
     grafoNoDirigido.agregarArista(Arista(2,4))
+    grafoNoDirigido.agregarArista(Arista(4,5))
     
     
     

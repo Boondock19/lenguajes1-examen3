@@ -24,7 +24,7 @@ public class DFS(val g: Grafo, val d:Int,val h:Int) : Busqueda<Int>() {
     var colores = Array(numVertices) {Color.BLANCO}
     var stack = Pila<Int>()
     var contar = true
-    var verticesExplorados = 0
+    var verticesExplorados = 1
 
 
     init {
@@ -39,16 +39,19 @@ public class DFS(val g: Grafo, val d:Int,val h:Int) : Busqueda<Int>() {
 
         while (!this.stack.vacio()) {
             val u = this.stack.remover()
-            if (this.contar) this.verticesExplorados++
+            
             g.adyacentes(u).forEach { l -> 
                 var v = l.elOtroVertice(u)
-                if (v == h) this.contar = false
+                
                 if (this.colores[v] === Color.BLANCO) {
+                    if (v == h) this.contar = false
+                    if (this.contar) this.verticesExplorados++
                     this.stack.agregar(v)
                     this.predecesoresNull[v] = u
                     this.colores[v] = Color.NEGRO
                 }
             }
+            println("Predecesores en dfs ${this.predecesoresNull.contentToString()}       ${this.verticesExplorados}     lo encontro? ${this.contar}")
         }
 
     }

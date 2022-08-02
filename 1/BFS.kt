@@ -22,7 +22,7 @@ public class BFS(val g: Grafo, val D: Int, H: Int): Busqueda<Int>() {
     var predecesores = Array(numVertices) {mutableListOf<Int>()}
     var distancias = Array(numVertices) {(Integer.MAX_VALUE)}
     var colores = Array(numVertices) {Color.BLANCO}
-    var nodosExplorados = 0
+    var nodosExplorados = 1
     var contar = true
     var encontroH = false
 
@@ -42,12 +42,14 @@ public class BFS(val g: Grafo, val D: Int, H: Int): Busqueda<Int>() {
         while (!queue.isEmpty()) {
             // desencolamos los elementos en el orden en que fueron ingresados
             u = queue.peek()
-            if (this.contar) this.nodosExplorados++
             queue.remove()
             g.adyacentes(u).forEach { l ->
                var v = l.elOtroVertice(u) // el otro vertice de U
-                if (v == H) this.contar = false
+                
+                
                 if (this.colores[v] === Color.BLANCO) {
+                    if (v == H) this.contar = false
+                    if (this.contar) this.nodosExplorados++
                     this.colores[v] = Color.GRIS
                     this.distancias[v] = this.distancias[u] + 1
                     this.predecesores[v].add(u)
@@ -55,6 +57,7 @@ public class BFS(val g: Grafo, val D: Int, H: Int): Busqueda<Int>() {
                 }
             }
             this.colores[u] = Color.NEGRO 
+            println("Predecesores en bfs ${this.predecesores.contentToString()}       ${this.nodosExplorados}        lo encontro? ${this.contar}")
         }
 
        
