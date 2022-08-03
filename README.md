@@ -30,3 +30,5 @@ Los programas estan hechos en Javascript,Java y Kotlin por lo que para poder eje
 - `npm run prolog` ejecutara el script para correr el programa de la pregunta 6.
 
 - Para la pregunta 1a , 2a ,3 se han agregado un PDF dentro de sus respectivas carpetas .
+
+- Se instalo la libreria Jest para realizar unit testing en JavaScript, pero no logre configurarlo de manera adecuada.
