@@ -1,6 +1,5 @@
 {
     "scripts": {
-        "start": " go run ./1/churchNumbers.go",
         "dev": "nodemon ./6/prolog.js",
         "comp-producto": "javac 2/ProductoPunto.java 2/Main.java",
         "comp-busqueda" :"kotlinc  1/Busqueda.kt 1/Arista.kt  1/Grafo.kt  1/GrafoNoDirigido.kt  1/Lado.kt  1/Color.kt 1/BFS.kt  1/DFS.kt 1/Secuencia.kt 1/PilaAndCola.kt 1/MainBusqueda.kt -include-runtime -d 1/MainBusqueda.jar",
