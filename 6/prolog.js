@@ -45,7 +45,7 @@ process.stdin.on("data", (data) => {
   if (dataArray[0] == "DEF") {
     let spliceData = dataArray.splice(1);
     spliceData[spliceData.length - 1] =
-    spliceData[spliceData.length - 1].trim();
+      spliceData[spliceData.length - 1].trim();
     defType(spliceData);
   }
 
@@ -72,7 +72,6 @@ process.stdin.on("data", (data) => {
  */
 
 const defType = (types) => {
-  console.log(types);
   let firstPredicate = types[0];
   let splitedType = firstPredicate.split("");
   const originalChar = splitedType[0];
@@ -108,10 +107,6 @@ const defType = (types) => {
       console.log("ERROR: el formato ingresado se encuentra mal parentizado");
     }
   }
-
-  console.log("Array de atomico" + " " + arrayOfAtomics);
-  console.log("Array de variable" + " " + arrayOfVariables);
-  console.log("Array de estructuras" + " " + arrayOfStructs);
 };
 
 /**
